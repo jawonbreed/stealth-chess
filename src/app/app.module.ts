@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { GameService } from './services/game.service';
 import { RuleService } from './services/rule.service';
+import { UtilService } from './services/util.service';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { RuleService } from './services/rule.service';
   ],
   providers: [
     GameService,
-    RuleService
+    RuleService,
+    UtilService
   ],
   bootstrap: [AppComponent]
 })

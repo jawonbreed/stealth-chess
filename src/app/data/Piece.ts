@@ -1,5 +1,5 @@
-import { Player } from './Player';
 import { PieceType } from './PieceType';
+import { Player } from './Player';
 
 export class Piece {
   readonly owner: Player;

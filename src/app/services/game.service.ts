@@ -16,9 +16,13 @@ export class GameService {
 
   private board: Piece[];
 
-  constructor(private ruleService: RuleService) {
+  constructor(ruleService: RuleService) {
     this.ruleService = ruleService;
     this.newGame();
+  }
+
+  getBoard() {
+    return this.board;
   }
 
   newGame() {

@@ -17,9 +17,9 @@ export class Piece {
   }
 
   toString() {
-    let s: this.owner + ' ' + this.pieceType + ' ' + this.col + this.row;
-    if (this.pieceType = PieceType.Assassin) {
-      s += ' ' + slurk;
+    let s = this.owner + ' ' + this.pieceType + ' ' + this.col + this.row;
+    if (this.pieceType == PieceType.Assassin) {
+      s += ' ' + this.slurk;
     }
     return s;
   }

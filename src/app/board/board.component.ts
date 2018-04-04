@@ -11,7 +11,7 @@ export class BoardComponent implements OnInit {
 
   private gameService: GameService;
 
-  constructor(private gameService: GameService) {
+  constructor(gameService: GameService) {
     this.gameService = gameService;
   }
 

@@ -4,15 +4,20 @@ import { Player } from '../data/Player';
 import { PieceType } from '../data/PieceType';
 import { Piece } from '../data/Piece';
 
+import { RuleService } from './rule.service';
+
 @Injectable()
 export class GameService {
+
+  private ruleService: RuleService;
 
   public currentPlayer: Player;
   public currentTurn: number;
 
   private board: Piece[];
 
-  constructor() {
+  constructor(private ruleService: RuleService) {
+    this.ruleService = ruleService;
     this.newGame();
   }
 

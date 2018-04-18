@@ -5,6 +5,7 @@ import { BoardComponent } from './board/board.component';
 
 import { GameService } from './services/game.service';
 import { RuleService } from './services/rule.service';
+import { UtilService } from './services/util.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,7 +16,8 @@ describe('AppComponent', () => {
       ],
       providers: [
         GameService,
-        RuleService
+        RuleService,
+        UtilService
       ]
     }).compileComponents();
   }));

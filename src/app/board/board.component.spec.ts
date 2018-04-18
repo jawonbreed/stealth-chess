@@ -4,6 +4,7 @@ import { BoardComponent } from './board.component';
 
 import { GameService } from '../services/game.service';
 import { RuleService } from '../services/rule.service';
+import { UtilService } from '../services/util.service';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -14,7 +15,8 @@ describe('BoardComponent', () => {
       declarations: [ BoardComponent ],
       providers: [
         GameService,
-        RuleService
+        RuleService,
+        UtilService
       ]
     })
     .compileComponents();

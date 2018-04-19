@@ -2,22 +2,24 @@ import { PieceType } from './PieceType';
 import { Player } from './Player';
 
 export class Piece {
+
   readonly owner: Player;
   readonly pieceType: PieceType;
-  public col: string;  /* A-H, X, Y */
-  public row: number;  /* 1-8 */
+
+  public file: string;  /* A-H, X, Y */
+  public rank: number;  /* 1-8 */
   public slurk: number;
 
-  constructor(owner: Player, pieceType: PieceType, col: string, row: number) {
+  constructor(owner: Player, pieceType: PieceType, file: string, rank: number) {
     this.owner = owner;
     this.pieceType = pieceType;
-    this.col = col;
-    this.row = row;
+    this.file = file;
+    this.rank = rank;
     this.slurk = 0;
   }
 
-  toString() {
-    let s = this.owner + ' ' + this.pieceType + ' ' + this.col + this.row;
+  toString() : string {
+    let s = this.owner + ' ' + this.pieceType + ' ' + this.file + this.rank;
     if (this.pieceType == PieceType.Assassin) {
       s += ' ' + this.slurk;
     }
@@ -34,7 +36,7 @@ export class Piece {
           case PieceType.Bishop:   return '\u2657'
           case PieceType.Knight:   return '\u2658'
           case PieceType.Pawn:     return '\u2659'
-          case PieceType.Assassin: return '\u2020'
+          case PieceType.Assassin: return '\u2E38'
           default: return '';
         }
       }
@@ -46,7 +48,7 @@ export class Piece {
           case PieceType.Bishop:   return '\u265D'
           case PieceType.Knight:   return '\u265E'
           case PieceType.Pawn:     return '\u265F'
-          case PieceType.Assassin: return '\u2E38'
+          case PieceType.Assassin: return '\u2020'
           default: return '';
         }
       }

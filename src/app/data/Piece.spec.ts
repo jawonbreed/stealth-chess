@@ -11,7 +11,7 @@ describe('Piece', () => {
     expect(piece.getSymbol()).toBe('♔');
 
     piece = new Piece(Player.Black, PieceType.Assassin, 'A', 1);
-    expect(piece.getSymbol()).toBe('⸸');
+    expect(piece.getSymbol()).toBe('†');
   });
 });
 

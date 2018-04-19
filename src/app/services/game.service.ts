@@ -21,11 +21,11 @@ export class GameService {
     this.newGame();
   }
 
-  getBoard() {
+  getBoard() : Piece[] {
     return this.board;
   }
 
-  newGame() {
+  newGame() : void {
     this.currentPlayer = Player.White;
     this.currentTurn = 1;
 

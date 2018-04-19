@@ -27,12 +27,38 @@ export class BoardComponent implements OnInit {
     this.displayBoard = [];
   }
 
-  ngOnInit() {
-    let board = [];
-    for (let i = 0; i < 8; i++) {
-      let a = ['', '', '', '', '', '', '', '', '', ''];
-      board.push(a);
+  ngOnInit() : void {
+    for (let row = 1; row <= 8; row++) {
+      this.displayBoard.push([,,,,,,,,,]);
     }
-    this.displayBoard = board;
+
+    this.show();
+  }
+
+  show() : void {
+    this.clear();
+
+    for (let piece of this.gameService.getBoard()) {
+      let pos = this.getPosition(piece);
+      let row = this.displayBoard[pos[0]];
+      row[pos[1]] = this.utilService.getSymbol(piece);
+    }
+  }
+
+  clear() : void {
+    for (let row of this.displayBoard) {
+      row.fill('');
+    }
+  }
+
+  getPosition(piece: Piece) : [number, number] {
+    let row = piece.row - 1;  // Piece rows are 1-based
+    let col = 'XABCDEFGHY'.indexOf(piece.col);
+
+    if (this.perspective == Player.White) {
+      return [row, col];
+    } else {
+      return [7 - row, 9 - col];
+    }
   }
 }

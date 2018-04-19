@@ -4,7 +4,6 @@ import { Piece } from '../data/Piece';
 import { Player } from '../data/Player';
 
 import { GameService } from '../services/game.service';
-import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-board',
@@ -14,14 +13,12 @@ import { UtilService } from '../services/util.service';
 export class BoardComponent implements OnInit {
 
   private gameService: GameService;
-  private utilService: UtilService;
 
   private perspective: Player;
   private displayBoard: string[][];
 
-  constructor(gameService: GameService, utilService: UtilService) {
+  constructor(gameService: GameService) {
     this.gameService = gameService;
-    this.utilService = utilService;
 
     this.perspective = Player.White;
     this.displayBoard = [];
@@ -41,7 +38,7 @@ export class BoardComponent implements OnInit {
     for (let piece of this.gameService.getBoard()) {
       let pos = this.getPosition(piece);
       let row = this.displayBoard[pos[0]];
-      row[pos[1]] = this.utilService.getSymbol(piece);
+      row[pos[1]] = piece.getSymbol();
     }
   }
 

@@ -34,14 +34,15 @@ describe('BoardComponent', () => {
 
   it('should initialize with 80 board squares', () => {
     const topDiv = fixture.nativeElement.childNodes[0];
-    expect(topDiv.querySelectorAll('div').length).toBe(80);
+    expect(topDiv.getElementsByClassName('red').length).toBe(8);
+    expect(topDiv.getElementsByClassName('grey').length).toBe(8);
+    expect(topDiv.getElementsByClassName('black').length).toBe(32);
+    expect(topDiv.getElementsByClassName('white').length).toBe(32);
   });
 
   it('should set up chessboard', () => {
-    const topDiv = fixture.nativeElement.childNodes[0];
-    const squares = topDiv.querySelectorAll('div');
-    expect(squares[0].textContent).toBe('†');
-    expect(squares[79].textContent).toBe('⸸');
+    expect(document.getElementById('00').textContent).toBe('†');
+    expect(document.getElementById('79').textContent).toBe('⸸');
   });
 
 });

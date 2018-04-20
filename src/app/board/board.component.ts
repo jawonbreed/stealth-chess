@@ -36,7 +36,7 @@ export class BoardComponent implements OnInit {
     this.clearBoard();
 
     for (let piece of this.gameService.getBoard()) {
-      let pos = this.getPosition(piece);
+      const pos = this.getPosition(piece);
       this.displayBoard[pos[0]][pos[1]] = piece.getSymbol();
     }
   }
@@ -47,9 +47,21 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  onClick(row: number, col: number) : void {
+    throw new Error('TODO implement');
+  }
+
+  getSquareColor(row: number, col: number) : string {
+    if (col == 0 || col == 9) {
+      return (row % 2 == col % 2) ? "red" : "grey";
+    } else {
+      return (row % 2 == col % 2) ? "black" : "white";
+    }
+  }
+
   getPosition(piece: Piece) : [number, number] {
-    let row = piece.rank - 1;  // Ranks are 1-based
-    let col = 'XABCDEFGHY'.indexOf(piece.file);
+    const row = piece.rank - 1;  // Ranks are 1-based
+    const col = 'XABCDEFGHY'.indexOf(piece.file);
 
     if (this.perspective == Player.White) {
       return [7 - row, 9 - col];

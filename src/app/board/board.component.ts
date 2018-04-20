@@ -51,6 +51,13 @@ export class BoardComponent implements OnInit {
     throw new Error('TODO implement');
   }
 
+  isHighlighted(row: number, col: number) : boolean {
+    if (row == 0 && col == 0) {
+      return true;
+    }
+    return false;
+  }
+
   getSquareColor(row: number, col: number) : string {
     if (col == 0 || col == 9) {
       return (row % 2 == col % 2) ? "red" : "grey";

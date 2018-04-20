@@ -5,6 +5,7 @@
      class="{{ getSquareColor(row, col) }}"
      [innerHtml]="displayBoard[row][col]"
      (click)="onClick(row, col)"
+     [class.highlighted]="isHighlighted(row, col)"
      >
     </div>
   </div>

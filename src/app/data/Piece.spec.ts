@@ -6,7 +6,7 @@ import { Piece } from './Piece';
 
 describe('Piece', () => {
 
-  it('should return the correct string for a piece', () => {
+  it('should return the correct symbol on getSymbol()', () => {
     let piece = new Piece(Player.White, PieceType.King, 'A', 1);
     expect(piece.getSymbol()).toBe('♔');
 

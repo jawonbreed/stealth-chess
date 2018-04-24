@@ -15,12 +15,14 @@ export class BoardComponent implements OnInit {
   private gameService: GameService;
 
   private perspective: Player;
+  private highlighted: [string, number];  // file and rank
   private displayBoard: string[][];
 
   constructor(gameService: GameService) {
     this.gameService = gameService;
 
     this.perspective = Player.White;
+    this.highlighted = undefined;
 
     this.displayBoard = [];
     for (let i = 0; i < 8; i++) {
@@ -57,11 +59,12 @@ export class BoardComponent implements OnInit {
    * @returns Boolean of whether the given board square should be highlighted.
    */
   isHighlighted(row: number, col: number) : boolean {
-    // TODO IMPLEMENT
-    if (row == 0 && col == 0) {
-      return true;
+    if (this.highlighted === undefined) {
+      return false;
     }
-    return false;
+
+    let fileRank = this.getFileRank(row, col);
+    return this.highlighted[0] === fileRank[0] && this.highlighted[1] === fileRank[1];
   }
 
   /**
@@ -70,10 +73,10 @@ export class BoardComponent implements OnInit {
    * @returns String of color name for the square.
    */
   getSquareColor(row: number, col: number) : string {
-    if (col == 0 || col == 9) {
-      return (row % 2 == col % 2) ? "red" : "grey";
+    if (col === 0 || col === 9) {
+      return (row % 2 === col % 2) ? "red" : "grey";
     } else {
-      return (row % 2 == col % 2) ? "black" : "white";
+      return (row % 2 === col % 2) ? "black" : "white";
     }
   }
 
@@ -86,10 +89,33 @@ export class BoardComponent implements OnInit {
     const row = piece.rank - 1;  // Ranks are 1-based
     const col = 'XABCDEFGHY'.indexOf(piece.file);
 
-    if (this.perspective == Player.White) {
+    if (this.perspective === Player.White) {
       return [7 - row, col];
     } else {
       return [row, 9 - col];
     }
+  }
+
+  /**
+   * Given a row and col coordinate, return the file and rank of the square.
+   */
+  getFileRank(row: number, col: number) : [string, number] {
+    if (this.perspective === Player.White) {
+      return ['XABCDEFGHY'.charAt(col), 8 - row];
+    } else {
+      return ['XABCDEFGHY'.charAt(9 - col), row + 1];
+    }
+  }
+
+  setPerspective(perspective: Player) : void {
+    this.perspective = perspective;
+  }
+
+  setHighlighted(file: string, rank: number) : void {
+    this.highlighted = [file, rank];
+  }
+
+  clearHighlighted() : void {
+    this.highlighted = undefined;
   }
 }

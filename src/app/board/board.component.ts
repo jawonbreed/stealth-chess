@@ -87,9 +87,9 @@ export class BoardComponent implements OnInit {
     const col = 'XABCDEFGHY'.indexOf(piece.file);
 
     if (this.perspective == Player.White) {
-      return [7 - row, 9 - col];
+      return [7 - row, col];
     } else {
-      return [row, col];
+      return [row, 9 - col];
     }
   }
 }

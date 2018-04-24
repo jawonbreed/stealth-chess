@@ -25,6 +25,22 @@ export class GameService {
     return this.board;
   }
 
+  /**
+   * Returns the Piece at the given file and rank, or undefined if not found.
+   */
+  getPieceAt(file: string, rank: number) : Piece {
+    for (let piece of this.board) {
+      if (piece.file == file && piece.rank == rank) {
+        return piece;
+      }
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Initializes a new game board.
+   */
   newGame() : void {
     this.currentPlayer = Player.White;
     this.currentTurn = 1;

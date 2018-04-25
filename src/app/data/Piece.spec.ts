@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { Player } from './Player';
-import { PieceType } from './PieceType';
 import { Piece } from './Piece';
+import { PieceType } from './PieceType';
+import { Player } from './Player';
 
 describe('Piece', () => {
 
@@ -13,5 +13,10 @@ describe('Piece', () => {
     piece = new Piece(Player.Black, PieceType.Assassin, 'A', 1);
     expect(piece.getSymbol()).toBe('†');
   });
-});
 
+  it('should return the correct toString()', () => {
+    let piece = new Piece(Player.White, PieceType.King, 'A', 1);
+    expect(piece.toString()).toBe('White King A 1');
+  });
+
+});

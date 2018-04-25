@@ -1,25 +1,26 @@
 import { PieceType } from './PieceType';
 import { Player } from './Player';
+import { Square } from './Square';
 
 export class Piece {
 
   readonly owner: Player;
   readonly pieceType: PieceType;
 
-  public file: string;  /* A-H, X, Y */
-  public rank: number;  /* 1-8 */
+  public square: Square;
   public slurk: number;
 
-  constructor(owner: Player, pieceType: PieceType, file: string, rank: number) {
+  constructor(owner: Player, pieceType: PieceType, file?: string, rank?: number, square?: Square) {
     this.owner = owner;
     this.pieceType = pieceType;
-    this.file = file;
-    this.rank = rank;
+    this.square = (square != undefined) ? square : new Square(file, rank);
     this.slurk = 0;
   }
 
   toString() : string {
-    let s = this.owner + ' ' + this.pieceType + ' ' + this.file + this.rank;
+    let owner = Player[this.owner];
+    let pieceType = PieceType[this.pieceType];
+    let s = `${owner} ${pieceType} ${this.square}`;
     if (this.pieceType == PieceType.Assassin) {
       s += ' ' + this.slurk;
     }

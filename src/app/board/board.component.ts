@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Piece } from '../data/Piece';
 import { Player } from '../data/Player';
+import { Square } from '../data/Square';
 
 import { GameService } from '../services/game.service';
 
@@ -15,7 +16,7 @@ export class BoardComponent implements OnInit {
   private gameService: GameService;
 
   private perspective: Player;
-  private highlighted: [string, number];  // file and rank
+  private highlighted: Square;
   private displayBoard: string[][];
 
   constructor(gameService: GameService) {
@@ -63,8 +64,7 @@ export class BoardComponent implements OnInit {
       return false;
     }
 
-    let fileRank = this.getFileRank(row, col);
-    return this.highlighted[0] === fileRank[0] && this.highlighted[1] === fileRank[1];
+    return this.highlighted.equals(this.getSquare(row, col));
   }
 
   /**
@@ -72,7 +72,7 @@ export class BoardComponent implements OnInit {
    *
    * @returns String of color name for the square.
    */
-  getSquareColor(row: number, col: number) : string {
+  getColor(row: number, col: number) : string {
     if (col === 0 || col === 9) {
       return (row % 2 === col % 2) ? "red" : "grey";
     } else {
@@ -83,27 +83,28 @@ export class BoardComponent implements OnInit {
   /**
    * Given a Piece object, returns where on the board it should be displayed, depending on perspective.
    *
-   * @returns Tuple of [row, col] coordinate.
+   * @returns Tuple of [row, col] coordinate for the current perspective.
    */
   getPosition(piece: Piece) : [number, number] {
-    const row = piece.rank - 1;  // Ranks are 1-based
-    const col = 'XABCDEFGHY'.indexOf(piece.file);
+    const square = piece.square;
 
     if (this.perspective === Player.White) {
-      return [7 - row, col];
+      return [7 - square.rankIndex, square.fileIndex];
     } else {
-      return [row, 9 - col];
+      return [square.rankIndex, 9 - square.fileIndex];
     }
   }
 
   /**
    * Given a row and col coordinate, return the file and rank of the square.
+   *
+   * @returns Square object that corresponds to the given coordinate and the current perspective.
    */
-  getFileRank(row: number, col: number) : [string, number] {
+  getSquare(row: number, col: number) : Square {
     if (this.perspective === Player.White) {
-      return ['XABCDEFGHY'.charAt(col), 8 - row];
+      return new Square(Square.FILES.charAt(col), 8 - row);
     } else {
-      return ['XABCDEFGHY'.charAt(9 - col), row + 1];
+      return new Square(Square.FILES.charAt(9 - col), row + 1);
     }
   }
 
@@ -112,7 +113,7 @@ export class BoardComponent implements OnInit {
   }
 
   setHighlighted(file: string, rank: number) : void {
-    this.highlighted = [file, rank];
+    this.highlighted = new Square(file, rank);
   }
 
   clearHighlighted() : void {

@@ -1,8 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { Player } from '../data/Player';
-import { PieceType } from '../data/PieceType';
 import { Piece } from '../data/Piece';
+import { PieceType } from '../data/PieceType';
+import { Player } from '../data/Player';
+import { Square } from '../data/Square';
 
 import { GameService } from './game.service';
 import { RuleService } from './rule.service';
@@ -44,9 +45,12 @@ describe('GameService', () => {
 
   it('should return the correct piece or undefined on getPieceAt()',
       inject([GameService], (service: GameService) => {
-    expect(service.getPieceAt('E', 1)).toEqual(new Piece(Player.White, PieceType.King, 'E', 1));
-    expect(service.getPieceAt('E', 8)).toEqual(new Piece(Player.Black, PieceType.King, 'E', 8));
-    expect(service.getPieceAt('A', 4)).toBeUndefined();
+    expect(service.getPieceAt(new Square('E', 1)))
+      .toEqual(new Piece(Player.White, PieceType.King, 'E', 1));
+    expect(service.getPieceAt(new Square('E', 8)))
+      .toEqual(new Piece(Player.Black, PieceType.King, 'E', 8));
+    expect(service.getPieceAt(new Square('A', 4)))
+      .toBeUndefined();
   }));
 
 });

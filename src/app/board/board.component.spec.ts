@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BoardComponent } from './board.component';
 
 import { Player } from '../data/Player';
+import { Square } from '../data/Square';
 
 import { GameService } from '../services/game.service';
 import { RuleService } from '../services/rule.service';
@@ -73,20 +74,20 @@ describe('BoardComponent', () => {
 
   });
 
-  it('should return the correct file and rank on getFileRank()', () => {
+  it('should return the correct Square on getSquare()', () => {
     component.setPerspective(Player.White);
-    expect(component.getFileRank(0, 0)).toEqual(['X', 8]);
-    expect(component.getFileRank(7, 0)).toEqual(['X', 1]);
-    expect(component.getFileRank(0, 9)).toEqual(['Y', 8]);
-    expect(component.getFileRank(7, 9)).toEqual(['Y', 1]);
-    expect(component.getFileRank(6, 4)).toEqual(['D', 2]);
+    expect(component.getSquare(0, 0)).toEqual(new Square('X', 8));
+    expect(component.getSquare(7, 0)).toEqual(new Square('X', 1));
+    expect(component.getSquare(0, 9)).toEqual(new Square('Y', 8));
+    expect(component.getSquare(7, 9)).toEqual(new Square('Y', 1));
+    expect(component.getSquare(6, 4)).toEqual(new Square('D', 2));
 
     component.setPerspective(Player.Black);
-    expect(component.getFileRank(0, 0)).toEqual(['Y', 1]);
-    expect(component.getFileRank(7, 0)).toEqual(['Y', 8]);
-    expect(component.getFileRank(0, 9)).toEqual(['X', 1]);
-    expect(component.getFileRank(7, 9)).toEqual(['X', 8]);
-    expect(component.getFileRank(6, 4)).toEqual(['E', 7]);
+    expect(component.getSquare(0, 0)).toEqual(new Square('Y', 1));
+    expect(component.getSquare(7, 0)).toEqual(new Square('Y', 8));
+    expect(component.getSquare(0, 9)).toEqual(new Square('X', 1));
+    expect(component.getSquare(7, 9)).toEqual(new Square('X', 8));
+    expect(component.getSquare(6, 4)).toEqual(new Square('E', 7));
   });
 
 });

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Player } from '../data/Player';
-import { PieceType } from '../data/PieceType';
 import { Piece } from '../data/Piece';
+import { PieceType } from '../data/PieceType';
+import { Player } from '../data/Player';
+import { Square } from '../data/Square';
 
 import { RuleService } from './rule.service';
 
@@ -26,11 +27,11 @@ export class GameService {
   }
 
   /**
-   * Returns the Piece at the given file and rank, or undefined if not found.
+   * Returns the Piece at the given square, or undefined if not found.
    */
-  getPieceAt(file: string, rank: number) : Piece {
+  getPieceAt(square: Square) : Piece {
     for (let piece of this.board) {
-      if (piece.file == file && piece.rank == rank) {
+      if (piece.square.equals(square)) {
         return piece;
       }
     }

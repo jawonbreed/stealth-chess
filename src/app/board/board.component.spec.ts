@@ -35,7 +35,7 @@ describe('BoardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with 80 board squares', () => {
+  it('should initialize with correctly colored squares', () => {
     const topDiv = fixture.nativeElement.childNodes[0];
     expect(topDiv.getElementsByClassName('red').length).toBe(8);
     expect(topDiv.getElementsByClassName('grey').length).toBe(8);
@@ -43,9 +43,56 @@ describe('BoardComponent', () => {
     expect(topDiv.getElementsByClassName('white').length).toBe(32);
   });
 
-  it('should set up chessboard', () => {
+  it('should set up the pieces on the board', () => {
     expect(document.getElementById('00').textContent).toBe('†');
+    expect(document.getElementById('01').textContent).toBe('♜');
+    expect(document.getElementById('02').textContent).toBe('♞');
+    expect(document.getElementById('03').textContent).toBe('♝');
+    expect(document.getElementById('04').textContent).toBe('♛');
+    expect(document.getElementById('05').textContent).toBe('♚');
+    expect(document.getElementById('06').textContent).toBe('♝');
+    expect(document.getElementById('07').textContent).toBe('♞');
+    expect(document.getElementById('08').textContent).toBe('♜');
+    expect(document.getElementById('09').textContent).toBe('†');
+    for (let i = 11; i < 19; i++) {
+      expect(document.getElementById('' + i).textContent).toBe('♟');
+    }
+
+    expect(document.getElementById('70').textContent).toBe('⸸');
+    expect(document.getElementById('71').textContent).toBe('♖');
+    expect(document.getElementById('72').textContent).toBe('♘');
+    expect(document.getElementById('73').textContent).toBe('♗');
+    expect(document.getElementById('74').textContent).toBe('♕');
+    expect(document.getElementById('75').textContent).toBe('♔');
+    expect(document.getElementById('76').textContent).toBe('♗');
+    expect(document.getElementById('77').textContent).toBe('♘');
+    expect(document.getElementById('78').textContent).toBe('♖');
     expect(document.getElementById('79').textContent).toBe('⸸');
+    for (let i = 61; i < 69; i++) {
+      expect(document.getElementById('' + i).textContent).toBe('♙');
+    }
+  });
+
+  it('should highlight the correct square on onClick()', () => {
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 10; col++) {
+        expect(component.isHighlighted(row, col)).toBe(false);
+      }
+    }
+
+    component.onClick(2, 4);
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 10; col++) {
+        expect(component.isHighlighted(row, col)).toBe(row === 2 && col === 4);
+      }
+    }
+
+    component.onClick(2, 4);
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 10; col++) {
+        expect(component.isHighlighted(row, col)).toBe(false);
+      }
+    }
   });
 
   it('should return the correct value for isHighlighted()', () => {

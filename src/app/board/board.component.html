@@ -2,9 +2,12 @@
   <div *ngFor="let row of [0, 1, 2, 3, 4, 5, 6, 7]">
     <div *ngFor="let col of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
      id="{{ row }}{{ col }}"
+
      class="{{ getColor(row, col) }}"
-     [class.highlighted]="isHighlighted(row, col)"
+     [ngClass]="isHighlighted(row, col) ? 'highlighted' : ''"
+
      [innerHtml]="displayBoard[row][col]"
+
      (click)="onClick(row, col)"
      >
     </div>

@@ -51,7 +51,14 @@ export class BoardComponent implements OnInit {
   }
 
   onClick(row: number, col: number) : void {
-    throw new Error('TODO implement');
+    if (this.isHighlighted(row, col)) {
+      this.highlighted = undefined;
+      return;
+    }
+
+    const square = this.getSquare(row, col);
+    // TODO FIX
+    this.highlighted = square;
   }
 
   /**

@@ -15,7 +15,8 @@ export class RuleService {
    * @return MoveResult that contains whether moving piece to the destination is a successful
    * move, given the board. If the move is not valid, the result will contain reasons why.
    */
-  tryMove(piece: Piece, board: Piece[], to: Square) : MoveResult {
+  // TODO: check is a difficult verb to use for this particular project.
+  checkMove(piece: Piece, board: Piece[], to: Square) : MoveResult {
     return false;
   }
 

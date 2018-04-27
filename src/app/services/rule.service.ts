@@ -17,7 +17,7 @@ export class RuleService {
    */
   // TODO: check is a difficult verb to use for this particular project.
   checkMove(piece: Piece, board: Piece[], to: Square) : MoveResult {
-    return false;
+    return undefined;
   }
 
   /**
@@ -28,10 +28,17 @@ export class RuleService {
   }
 
   /**
-   * @return Boolean of whether the piece on the board can legally move to the square.
+   * @return MoveResult of whether the piece on the board can legally move to the square.
    */
-  canMove(piece: Piece, board: Piece[], to: Square) : boolean {
-    let result = false;
+  canMove(piece: Piece, board: Piece[], to: Square) : MoveResult {
+    let success = false;
+    let reasons = [];
+
+    const dist = piece.square.distance(to);
+    if (dist[0] === 0 && dist[1] === 0) {
+      reasons.push('Must move to a different square.');
+      return new MoveResult(false, reasons);
+    }
 
     switch (piece.pieceType) {
       case PieceType.King: {
@@ -56,11 +63,11 @@ export class RuleService {
         break;
       }
       default: {
-        return false;
+        return new MoveResult(false, ["Unknown piece: " + piece.pieceType]);
       }
     }
 
-    return result;
+    return new MoveResult(success, reasons);
   }
 
   /**

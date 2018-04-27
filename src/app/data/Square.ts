@@ -22,8 +22,18 @@ export class Square {
     this.rankIndex = rank - 1;
   }
 
+  /**
+   * @return Boolean of whether the two squares are identical, i.e. same file and rank.
+   */
   equals(sq: Square) : boolean {
     return this.file === sq.file && this.rank === sq.rank;
+  }
+
+  /**
+   * @return Tuple of the file and rank distance between the two squares. Always positive.
+   */
+  distance(sq: Square) : [number, number] {
+    return [Math.abs(this.fileIndex - sq.fileIndex), Math.abs(this.rankIndex - sq.rankIndex)];
   }
 
   toString() : string {

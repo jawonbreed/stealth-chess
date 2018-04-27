@@ -1,3 +1,9 @@
+/**
+ * Represents a square on the chessboard, with a given file and rank.
+ *
+ * This object does not represent the display square, since that can change depending on
+ * the current perspective.
+ */
 export class Square {
   static FILES = 'XABCDEFGHY';
 

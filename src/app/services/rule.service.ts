@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { MoveResult } from '../data/MoveResult';
 import { Piece } from '../data/Piece';
 import { PieceType } from '../data/PieceType';
 import { Player } from '../data/Player';
@@ -11,9 +12,10 @@ export class RuleService {
   constructor() { }
 
   /**
-   * @return Boolean of whether moving piece to the destination is a valid move, given the board.
+   * @return MoveResult that contains whether moving piece to the destination is a successful
+   * move, given the board. If the move is not valid, the result will contain reasons why.
    */
-  validateMove(piece: Piece, board: Piece[], to: Square) : boolean {
+  tryMove(piece: Piece, board: Piece[], to: Square) : MoveResult {
     return false;
   }
 
@@ -27,7 +29,7 @@ export class RuleService {
   /**
    * @return Boolean of whether the piece on the board can legally move to the square.
    */
-  private canMove(piece: Piece, board: Piece[], to: Square) : boolean {
+  canMove(piece: Piece, board: Piece[], to: Square) : boolean {
     let result = false;
 
     switch (piece.pieceType) {
@@ -63,7 +65,7 @@ export class RuleService {
   /**
    * @return Boolean of whether this is a legal castling move.
    */
-  private canCastle(king: Piece, rook: Piece, board: Piece[], to: Square) : boolean {
+  canCastle(king: Piece, rook: Piece, board: Piece[], to: Square) : boolean {
     return false;
   }
 

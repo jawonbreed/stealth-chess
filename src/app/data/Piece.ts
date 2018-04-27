@@ -2,6 +2,9 @@ import { PieceType } from './PieceType';
 import { Player } from './Player';
 import { Square } from './Square';
 
+/**
+ * Represents a chess piece on the board.
+ */
 export class Piece {
 
   readonly owner: Player;
